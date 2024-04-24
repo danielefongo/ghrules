@@ -1,0 +1,36 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  required:
+    name: unit tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        rev: [nightly, v0.9.0]
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: first step
+        run: |
+          exit 0
+
+      - name: second step
+        run: |
+          ./tests
+
+  linting:
+    runs-on: ubuntu-latest
+    name: linting
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: run tests
+        run: |
+          ./linting
